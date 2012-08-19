@@ -8,6 +8,7 @@
  *  Parse request
  *  Prepare Controller
  *  Execute Controller
+ *  Post Controller
  */
 
 // Define applocation root
@@ -26,3 +27,10 @@ set_exception_handler(array('ErrorHandler', 'unhandledException'));
 // Register autoloader
 require 'utilities/autoloader.php';
 spl_autoload_register(array('Autoloader', 'load'));
+
+// Go!
+require 'utilities/router.php';
+Router::parseRequest();
+Router::preController();
+Router::executeController();
+Router::postController();
