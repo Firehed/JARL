@@ -5,10 +5,16 @@ class Autoloader {
 	public static function load($class) {
 		$class = strtolower($class);
 		if (false === strpos($class, '\\')) {
-			require APPROOT . "utilities/$class.php";
+			$path = APPROOT . "utilities/$class.php";
 		}
 		else {
-			require APPROOT . str_replace('\\', '/', $class) . '.php';
+			$path = APPROOT . str_replace('\\', '/', $class) . '.php';
+		}
+		if (file_exists($path)) {
+			include $path;
+		}
+		else {
+			throw new Exception("File for class '$class' not found at $path");
 		}
 	}
 
