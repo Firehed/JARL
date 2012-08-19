@@ -9,3 +9,6 @@
  *  Prepare Controller
  *  Execute Controller
  */
+
+// Pull core config, import into $GLOBALS
+$GLOBALS = require 'config.php';
