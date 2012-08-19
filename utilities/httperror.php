@@ -43,7 +43,12 @@ class HTTPError extends Exception {
 	}
 
 	private function sendHeader() {
-		header("HTTP/1.1 {$this->getCode()} {$this->getMessage()}");
+		if (headers_sent($file, $line)) {
+			error_log("HTTPError rendered after headers sent, output started from $file:$line");
+		}
+		else {
+			header("HTTP/1.1 {$this->getCode()} {$this->getMessage()}");
+		}
 	}
 
 }
