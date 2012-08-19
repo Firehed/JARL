@@ -53,8 +53,7 @@ class Router {
 
 		// Nothing found? 404
 		if (!$action) {
-			// FIXME: 404 out
-			throw new Exception;
+			throw new HTTPError(404);
 		}
 		self::$method = $action;
 	}
