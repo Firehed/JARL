@@ -56,6 +56,7 @@ class Router {
 			throw new HTTPError(404);
 		}
 		self::$method = $action;
+		self::$controller->setUp();
 	}
 
 	public static function executeController() {
@@ -63,8 +64,7 @@ class Router {
 	}
 
 	public static function postController() {
-		// You can't unset static properties, but this will trigger the destructor via GC
-		self::$controller = null;
+		self::$controller->tearDown();
 	}
 
 	/**
