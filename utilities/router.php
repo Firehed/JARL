@@ -19,7 +19,8 @@ class Router {
 		else {
 			$uri = $_SERVER['REQUEST_URI'];
 		}
-
+		// Remove duplicate slashes from weird URIs
+		$uri = preg_replace('#/{2,}#', '/', $uri); // using # as delimeter instead of typical / for readability (avoid excessive escaping)
 		// Trim the leading slash, then split by subsequent slashes
 		$parts = explode('/', ltrim($uri, '/'));
 		self::$name   = array_shift($parts) ? : $GLOBALS['defaultController'];
